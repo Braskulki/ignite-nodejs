@@ -1,11 +1,11 @@
-import { ICategoriesRepository } from '../repositories/icategories.repository';
+import { ICategoriesRepository } from '../../repositories/icategories.repository';
 
 interface IRequest {
     name: string;
     description: string;
 }
 
-class CreateCategoryService {
+class CreateCategoryUseCase {
     constructor(private categoriesRepository: ICategoriesRepository) { } //eslint-disable-line
 
     execute({ name, description }: IRequest): void {
@@ -19,4 +19,4 @@ class CreateCategoryService {
     }
 }
 
-export { CreateCategoryService };
+export { CreateCategoryUseCase };
