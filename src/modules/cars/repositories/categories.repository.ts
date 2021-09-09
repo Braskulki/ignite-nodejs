@@ -2,11 +2,20 @@ import { Category } from '../model/category';
 import { ICreateCategoryDTO } from './icategories.repository';
 
 class CategoriesRepository {
-    // eslint-disable-next-line prettier/prettier
     private categories: Category[];
 
-    constructor() {
+    private static INSTANCE: CategoriesRepository;
+
+    private constructor() {
         this.categories = [];
+    }
+
+    public static getInstance(): CategoriesRepository {
+        if (!CategoriesRepository.INSTANCE) {
+            CategoriesRepository.INSTANCE = new CategoriesRepository();
+        }
+
+        return CategoriesRepository.INSTANCE;
     }
 
     create({ name, description }: ICreateCategoryDTO): void {
