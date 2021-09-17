@@ -1,4 +1,4 @@
-import { Category } from '../../model/category';
+import { Category } from '../../entities/category';
 import { ICreateCategoryDTO } from '../icategories.repository';
 
 class CategoriesRepository {
