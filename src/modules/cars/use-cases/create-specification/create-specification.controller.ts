@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import { CreateSpecificationUseCase } from './create-specification.use-case';
 
 class CreateSpecificationController {
-  constructor(private createSpecificationUseCase: CreateSpecificationUseCase) { }//eslint-disable-line
-
   handle(req: Request, res: Response): Response {
     const { name, description } = req.body;
 
-    this.createSpecificationUseCase.execute({ name, description });
+    const createSpecificationUseCase = container.resolve(CreateSpecificationUseCase);
+
+    createSpecificationUseCase.execute({ name, description });
     return res.status(201).send();
   }
 }

@@ -1,13 +1,14 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 
 import { ImportCategoryUseCase } from './import-category.use-case';
 
 class ImportCategoryController {
-  constructor(private importCategoryUseCase: ImportCategoryUseCase) { } //eslint-disable-line
-
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { file } = request;
-    this.importCategoryUseCase.execute(file);
+
+    const importCategoryUseCase = container.resolve(ImportCategoryUseCase);
+    await importCategoryUseCase.execute(file);
     return response.send();
   }
 }
